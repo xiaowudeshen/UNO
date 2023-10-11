@@ -7,11 +7,18 @@ thereby optimizing the training and fine-tuning of DST models. We demonstrate th
 
 ## Method:
 <p align="center">
-<img src="diagram.png" width="100%" />
+<img src="figs/figure.png" width="100%" />
 
 </p>
 
 Overview of **UNO-DST** which consists of two periods: 1) **joint training** for both task A (slot value prediction) and B (slot type prediction), and 2) **self-training** in the unknown target domain. **Step 1**: Generation of slot values and types from tasks A and B; **Step 2**: Selection of good samples using cycle consistency between two tasks; **Step 3**: Fine-turning the PLM with selected samples.
+
+<p align="center">
+<img src="figs/figure1.png" width="100%" />
+
+</p>
+
+Generalise **UNO-DST** to Large Language Models and ChatGPT. We utilise both In-Context Learning and Conversational approaches. Check the results in our paper.
 
 ## Citation
 Our work will be published on Arxiv. 
