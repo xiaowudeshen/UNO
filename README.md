@@ -24,12 +24,12 @@ Generalise **UNO-DST** to Large Language Models and ChatGPT. We utilise both In-
 Our work will be published on Arxiv. 
 
 ## Baseline
-Check our baseline on T5DST from Facebook research: [GIT REPO](https://github.com/facebookresearch/Zero-Shot-DST/tree/main/T5DST). Our code is modified based on the T5DST official repo.
+Check our baseline on [T5DST from Facebook research](https://github.com/facebookresearch/Zero-Shot-DST/tree/main/T5DST). Our code is modified based on the T5DST official repository.
 
 ## Environment
-Install the environment from the provided "env" file
+Install the environment from the provided "UNO-DST_env.yaml" file or you can use the [T5DST](https://github.com/facebookresearch/Zero-Shot-DST/tree/main/T5DST) environment 
 ```console
-❱❱❱ conda env create -f UNO-DST_env.yml
+❱❱❱ conda env create -f UNO-DST_env.yaml
 ```
 
 ## Experiments
@@ -66,9 +66,11 @@ Install the environment from the provided "env" file
 ```
 * --model_checkpoint: directory for saved model weights and config file
 * --next_step: next self training step, choose from R1, R2, R3
+* --only_domain: zero-shot testing domain, it should be consistent with the except_domain during the joint training period
   
 **Oracle Results for any Baseline or Checkpoint**
 ```console
 ❱❱❱ python self_step_oracle.py --train_batch_size 8 --GPU 1 --mode "self_training" --slot_lang question --saving_dir t5_self_oracle --n_epochs 1 --only_domain $domain --next_step "R1" --model_checkpoint ${model_checkpoint}
 ```
 * --model_checkpoint: directory for saved model weights and config file
+* --only_domain: zero-shot testing domain, it should be consistent with the except_domain during the joint training period
