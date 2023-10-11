@@ -11,6 +11,7 @@ thereby optimizing the training and fine-tuning of DST models. We demonstrate th
 
 </p>
 
+Overview of **UNO-DST** which consists of two periods: 1) **joint training** for both task A (slot value prediction) and B (slot type prediction), and 2) **self-training** in the unknown target domain. **Step 1**: Generation of slot values and types from tasks A and B; **Step 2**: Selection of good samples using cycle consistency between two tasks; **Step 3**: Fine-turning the PLM with selected samples.
 
 ## Citation
 Our work will be published on Arxiv. 
@@ -57,7 +58,7 @@ Install the environment from the provided "env" file
 ❱❱❱ python self_step2.py --train_batch_size 8 --GPU 1 --mode "self_training" --slot_lang question --saving_dir t5_self --n_epochs 3 --only_domain  ${domain} --next_step "R1" --model_checkpoint ${model_checkpoint}
 ```
 * --model_checkpoint: directory for saved model weights and config file
-* --next_step: next step training step, choose from R1, R2, R3
+* --next_step: next self training step, choose from R1, R2, R3
   
 **Oracle Results for any Baseline or Checkpoint**
 ```console
