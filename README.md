@@ -7,7 +7,7 @@ thereby optimizing the training and fine-tuning of DST models. We demonstrate th
 
 ## Method:
 <p align="center">
-<img src="figures/diagram.png" width="100%" />
+<img src="diagram.png" width="100%" />
 
 </p>
 
