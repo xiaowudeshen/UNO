@@ -1,18 +1,61 @@
-This is the temporary repo for UNO-DSt submitting to EMNLP 2023.
+# UNO-DST: Leveraging Unlabelled Data in Zero-shot Dialogue State Tracking
 
-We give a brief introduction in T5.py for joint training process
-For self-training, please refer to self-training folder
+## Abstract:
+Previous zero-shot dialogue state tracking (DST) methods only apply transfer learning while ignoring unlabelled data in the target domain.
+To mitigate this, we transform zero-shot DST into few-shot DST via joint and self-training methods. Our method incorporates auxiliary tasks that generate slot types as inverse prompts for main tasks, creating slot values during joint training. The cycle consistency between these two tasks enables the generation and selection of quality samples in unknown target domains for subsequent fine-tuning. This approach also facilitates automatic label creation,
+thereby optimizing the training and fine-tuning of DST models. We demonstrate the effectiveness and potential of this method on large language models. Experimental outcomes demonstrate our method's efficacy in zero-shot scenarios by improving average joint goal accuracy by 8% across all domains in MultiWOZ. 
 
-This code is built on the baseline of T5DST from Facebook Research.
+## Method:
+<p align="center">
+<img src="figures/diagram.png" width="100%" />
 
-| **MultiWoz Version** | **Model**| **attraction** | **hotel** | **restaurant** | **taxi**  | **train** | **Average** | **Margin (2.1->2.4)** |
-|------------------|------------|------------|-------|------------|-------|-------|---------|--------|
-| MultiWoz 2.1     | T5DST      | 30.45      | 19.38 | 20.42      | 66.32 | 25.60 | 32.44   |        |
-| MultiWoz 2.1     | UNO-DST-JT | 32.86      | 22.91 | 29.47      | 66.00 | 31.68 | 36.58   |        |
-| MultiWoz 2.1     | UNO-DST-ST | 33.09      | 25.66 | 30.99      | 65.48 | 48.90 | 40.82   |        |
-| MultiWoz 2.4     | T5DST      | 31.38      | 16.51 | 15.78      | 66.13 | 23.80 | 30.72   |    -1.72     |
-| MultiWoz 2.4     | UNO-DST-JT | 32.83      | 22.90 | 29.32      | 65.94 | 32.47 | 36.69   |    0.11      |
-| MultiWoz 2.4     | UNO-DST-ST | **35.02**  | **25.72** | **31.50** | **66.00** | **52.55** | **42.16**   | **1.34** |
+</p>
 
-Table 1. Results of T5DST, UNO-DST for MultiWoz 2.1 and 2.4. JT/ST stands for UNO-DST joint and self-training periods. The best results are shown in bold format. 
-# UNO
+
+## Citation
+
+
+## Baseline
+Check our baseline on T5DST from Facebook research: [GIT REPO](https://github.com/facebookresearch/Zero-Shot-DST/tree/main/T5DST). Our code is modified based on the T5DST official repo.
+
+## Environment
+Install the environment from the provided "env" file
+```console
+❱❱❱ conda env create -f UNO-DST_env.yml
+```
+
+## Experiments
+**Dataset**
+```console
+❱❱❱ python create_data.py
+```
+use create_data_2_1.py if you want to run with multiwoz2.1
+
+**Data Preprocessing**
+```console
+❱❱❱ python preprocessing_new.py
+❱❱❱ python prepare_mask_pretrain.py
+```
+preprocessing_new.py check if data is in correct format and check if the turn slot value are correct
+prepare_mask_pretrain.py perform masking of the training data, as in joint training period
+
+
+**Joint Traning Period**
+```console
+❱❱❱ # python T5.py --train_batch_size 8 --GPU 1 --n_epochs 1 --model_checkpoint t5-small --saving_dir t5_small --slot_lang question --except_domain ${domain} --joint_training mask_slot 
+```
+* --GPU: the number of gpu to use
+* --except_domain: hold out domain, choose one from [hotel, train, attraction, restaurant, taxi]
+
+**Self-Traning Period**
+```console
+❱❱❱ python self_step2.py --train_batch_size 8 --GPU 1 --mode "self_training" --slot_lang question --saving_dir t5_self --n_epochs 3 --only_domain  ${domain} --next_step "R1" --model_checkpoint ${model_checkpoint}
+```
+* --model_checkpoint: directory for saved model weights and config file
+* --next_step: next step training step, choose from R1, R2, R3
+  
+**Oracle Results for any Baseline or Checkpoint**
+```console
+❱❱❱ python self_step_oracle.py --train_batch_size 8 --GPU 1 --mode "self_training" --slot_lang question --saving_dir t5_self_oracle --n_epochs 1 --only_domain $domain --next_step "R1" --model_checkpoint ${model_checkpoint}
+```
+* --model_checkpoint: directory for saved model weights and config file
