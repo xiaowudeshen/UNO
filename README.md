@@ -13,7 +13,7 @@ thereby optimizing the training and fine-tuning of DST models. We demonstrate th
 
 
 ## Citation
-
+Our work will be published on Arxiv. 
 
 ## Baseline
 Check our baseline on T5DST from Facebook research: [GIT REPO](https://github.com/facebookresearch/Zero-Shot-DST/tree/main/T5DST). Our code is modified based on the T5DST official repo.
@@ -29,15 +29,20 @@ Install the environment from the provided "env" file
 ```console
 ❱❱❱ python create_data.py
 ```
-use create_data_2_1.py if you want to run with multiwoz2.1
+* --Create data for multiwoz2.0, data will be saved in the "data" folder
+```console
+❱❱❱ create_data_2_1.py
+```
+* --Create data for multiwoz2.1, data will be saved in the "data" folder
 
 **Data Preprocessing**
 ```console
 ❱❱❱ python preprocessing_new.py
 ❱❱❱ python prepare_mask_pretrain.py
 ```
-preprocessing_new.py check if data is in correct format and check if the turn slot value are correct
-prepare_mask_pretrain.py perform masking of the training data, as in joint training period
+* --preprocessing_new.py check if data is in the correct format and check if the turn slot values are correct
+* --prepare_mask_pretrain.py performs masking of the training data, as in the joint training period
+* --processed data will be saved in the "data1" folder
 
 
 **Joint Traning Period**
