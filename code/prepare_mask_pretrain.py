@@ -1,5 +1,4 @@
 from builtins import breakpoint
-import pandas as pd
 import json
 import copy
 import random
@@ -109,8 +108,8 @@ class data_preprocessing():
         out_file = open(path, 'w+')
         
         json.dump(self.updated_data, out_file, indent=4)
-        print(len(self.dup_dic))
-        print(self.dup_dic)
+        print("Number of duplicated slot values in conversationsl:", len(self.dup_dic))
+        # print(self.dup_dic)
 
         
 

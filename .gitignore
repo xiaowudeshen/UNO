@@ -8,6 +8,11 @@
 # Local History for Visual Studio Code
 .history/
 
+#data file
+/code/data/
+/code/data1/
+
+
 # Common credential files
 **/credentials.json
 **/client_secrets.json

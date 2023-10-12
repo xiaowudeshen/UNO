@@ -29,7 +29,7 @@ Check our baseline on [T5DST from Facebook research](https://github.com/facebook
 ## Environment
 Install the environment from the provided "UNO-DST_env.yaml" file or you can use the [T5DST](https://github.com/facebookresearch/Zero-Shot-DST/tree/main/T5DST) environment 
 ```console
-❱❱❱ conda env create -f UNO-DST_env.yaml
+❱❱❱ pip install -r requirement.txt
 ```
 
 ## Experiments

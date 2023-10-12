@@ -8,11 +8,10 @@ Original file is located at
 """
 
 
-import pandas as pd
 import json
 import copy
 import random
-
+import os
 class data_preprocessing():
     def __init__(self, data_json_file, ontology_json_file, subs_slot_percentage, out_file_path, to_mask = 0):
 
@@ -208,8 +207,10 @@ class data_preprocessing():
         out_file = open(path, 'w+')
         json.dump(self.data, out_file, indent=4)
 
-# preprocessed_data = data_preprocessing("data/train_dials.json", "data/ontology.json", 0, "data1/new_train_dials.json")
-# preprocessed_data = data_preprocessing("data/dev_dials.json", "data/ontology.json", 0, "data1/new_dev_dials.json")
-# preprocessed_data = data_preprocessing("data/test_dials.json", "data/ontology.json", 0, "data1/new_test_dials.json")
-preprocessed_data = data_preprocessing("data/mwz2.4/train_dials.json", "data/mwz2.4/ontology.json", 0, "data1/new_train_dials.json")
-preprocessed_data = data_preprocessing("data/mwz2.4/dev_dials.json", "data/mwz2.4/ontology.json", 0, "data1/new_dev_dials.json")
+if not os.path.exists('data1'):
+    os.makedirs('data1')
+preprocessed_data = data_preprocessing("data/train_dials.json", "data/ontology.json", 0, "data1/new_train_dials.json")
+preprocessed_data = data_preprocessing("data/dev_dials.json", "data/ontology.json", 0, "data1/new_dev_dials.json")
+preprocessed_data = data_preprocessing("data/test_dials.json", "data/ontology.json", 0, "data1/new_test_dials.json")
+# preprocessed_data = data_preprocessing("data/mwz2.4/train_dials.json", "data/mwz2.4/ontology.json", 0, "data1/new_train_dials.json")
+# preprocessed_data = data_preprocessing("data/mwz2.4/dev_dials.json", "data/mwz2.4/ontology.json", 0, "data1/new_dev_dials.json")
