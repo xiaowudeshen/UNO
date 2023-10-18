@@ -21,7 +21,19 @@ Overview of **UNO-DST** which consists of two periods: 1) **joint training** for
 Generalise **UNO-DST** to Large Language Models and ChatGPT. We utilise both In-Context Learning and Conversational approaches. Check the results in our paper.
 
 ## Citation
-Our work will be published on Arxiv. 
+Our UNO-DST is out and it can be accessed with the [LINK](https://arxiv.org/abs/2310.10492v1)
+```console
+@article{UNO-DST,
+  author    = {Chuang Li and Yan Zhang and Min-Yen Kan and Haizhou Li},
+  title     = {UNO-DST: Leveraging Unlabelled Data in Zero-shot Dialogue State Tracking},
+  journal   = {CoRR},
+  volume    = {abs/2310.10492v1},
+  year      = {2023},
+  url       = {https://arxiv.org/abs/2310.10492v1},
+  eprinttype = {arXiv},
+  eprint    = {2310.10492v1}
+}
+```
 
 ## Baseline
 Check our baseline on [T5DST from Facebook research](https://github.com/facebookresearch/Zero-Shot-DST/tree/main/T5DST). Our code is modified based on the T5DST official repository.
